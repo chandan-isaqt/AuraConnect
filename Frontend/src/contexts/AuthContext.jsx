@@ -1,9 +1,10 @@
 import axios from "axios";
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import server from "../environment";
 
 const client = axios.create({
-  baseURL: `http://localhost:8000/api/v1/users`,
+  baseURL: `${server}/api/v1/users`,
 });
 
 export const AuthContext = createContext();
@@ -18,7 +19,7 @@ export function AuthProvider({ children }) {
       const res = await client.post("/register", { name, username, password });
       return res.data.message;
     } catch (err) {
-      console.error("Registration failed:", err.response); 
+      console.error("Registration failed:", err.response);
       throw err.response?.data?.message || "Registration failed";
     }
   };
