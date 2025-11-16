@@ -67,18 +67,14 @@ export default function Authentication() {
         component="main"
         sx={{
           height: "100vh",
-          // background:
-          //   "linear-gradient(135deg, #6366f1 0%, #8b5cf6 35%, #ec4899 100%)",
           overflow: "hidden",
         }}
       >
         <CssBaseline />
 
+        {/* Grid Container */}
         <Grid
-          item
-          xs={12}
-          sm={7}
-          md={5}
+          container
           component={Paper}
           elevation={6}
           square
@@ -188,6 +184,8 @@ export default function Authentication() {
             </Box>
           </Fade>
         </Grid>
+
+        {/* Logo */}
         <Grid
           container
           sx={{
