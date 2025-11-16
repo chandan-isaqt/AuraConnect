@@ -72,7 +72,6 @@ export default function Authentication() {
       >
         <CssBaseline />
 
-        {/* Grid Container */}
         <Grid
           container
           component={Paper}
@@ -185,15 +184,14 @@ export default function Authentication() {
           </Fade>
         </Grid>
 
-        {/* Logo */}
         <Grid
           container
           sx={{
             height: "100vh",
             justifyContent: "center",
             alignItems: "center",
-            flexDirection: "column", // stack content vertically
-            gap: 2, // space between image and h1
+            flexDirection: "column",
+            gap: 2,
           }}
         >
           <img

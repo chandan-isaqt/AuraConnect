@@ -1,13 +1,12 @@
 import axios from "axios";
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import server from "../environment";
-
-export const AuthContext = createContext();
 
 const client = axios.create({
-  baseURL: `${server}:8000/api/v1/users`,
+  baseURL: `http://localhost:8000/api/v1/users`,
 });
+
+export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [userData, setUserData] = useState(null);
@@ -19,6 +18,7 @@ export function AuthProvider({ children }) {
       const res = await client.post("/register", { name, username, password });
       return res.data.message;
     } catch (err) {
+      console.error("Registration failed:", err.response); 
       throw err.response?.data?.message || "Registration failed";
     }
   };
@@ -27,11 +27,14 @@ export function AuthProvider({ children }) {
   const handleLogin = async (username, password) => {
     try {
       const res = await client.post("/login", { username, password });
+
       localStorage.setItem("token", res.data.token);
       setUserData({ username });
       navigate("/home");
     } catch (err) {
-      throw err.response?.data?.message || "Login failed";
+      console.error("Login failed:", err.response);
+      const errorMessage = err.response?.data?.message || "Login failed";
+      throw new Error(errorMessage);
     }
   };
 
@@ -39,10 +42,12 @@ export function AuthProvider({ children }) {
   const getHistoryOfUser = async () => {
     try {
       const token = localStorage.getItem("token");
+      if (!token) throw new Error("No token found");
+
       const res = await client.get("/get_all_activity", { params: { token } });
       return res.data;
     } catch (err) {
-      console.error(err);
+      console.error("Error getting user history:", err);
       throw err;
     }
   };
@@ -58,7 +63,7 @@ export function AuthProvider({ children }) {
         meeting_code: meetingCode,
       });
     } catch (err) {
-      console.error("Failed to add to history", err);
+      console.error("Failed to add to history:", err);
     }
   };
 
