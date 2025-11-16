@@ -1,0 +1,148 @@
+.meetVideoContainer {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background: rgb(97, 98, 110);
+}
+
+.meetUserVideo {
+  position: absolute;
+  bottom: 10vh;
+  height: 20vh;
+
+  width: auto;
+  left: 0;
+  /* top: 0; */
+  border-radius: 20px;
+}
+
+.buttonContainers {
+  position: absolute;
+  width: 100vw;
+  bottom: 0;
+  text-align: center;
+}
+
+.buttonContainers svg {
+  font-size: 3rem;
+}
+
+.conferenceView {
+  display: flex;
+  justify-content: center;
+  height: 20vh;
+  /* background-color: red; */
+
+  padding: 10px;
+  gap: 10px;
+}
+
+.conferenceView video {
+  width: 90vw;
+  /* background-color: red; */
+  height: 80vh;
+  min-width: 30vw;
+  /* background-color: red; */
+  border-radius: 80px;
+}
+
+/* .chatRoom {
+  position: absolute;
+  height: 90vh;
+  right: 0;
+  background: rgb(225, 165, 165);
+  border-radius: 10px;
+  width: 30vw;
+  padding-inline: 20px;
+}
+
+.chatContainer {
+  position: relative;
+  height: 100%;
+  background-color: rebeccapurple;
+  padding: 4;
+}
+
+.chattingArea {
+  position: absolute;
+  bottom: 0;
+} */
+.chatRoom {
+  position: absolute;
+  height: 90vh;
+  right: 0;
+  background: rgb(98, 80, 80);
+  border-radius: 10px;
+  width: 30vw;
+  padding-inline: 20px;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chatContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chattingDisplay {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  /* background: rgb(125, 125, 38); */
+  padding-right: 8px;
+}
+
+.chattingArea {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  /* background: rgb(59, 54, 64); */
+  flex-shrink: 0;
+}
+@media (max-width: 768px) {
+  .chatRoom {
+    width: 50vw;
+    height: 80vh;
+    right: 5%;
+    top: 3vh;
+
+    /* padding-inline: 65px; */
+  }
+  .conferenceView video {
+    width: 90vw;
+    /* background-color: red; */
+    height: 60vh;
+    min-width: 30vw;
+    /* background-color: red; */
+    border-radius: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chatRoom {
+    width: 90vw;
+    height: 65vh;
+    right: 5%;
+    top: 3vh;
+
+    /* padding-inline: 65px; */
+  }
+  .conferenceView video {
+    width: 90vw;
+    /* background-color: red; */
+    height: 50vh;
+    min-width: 30vw;
+    /* background-color: red; */
+    border-radius: 80px;
+  }
+
+  .chattingArea {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
