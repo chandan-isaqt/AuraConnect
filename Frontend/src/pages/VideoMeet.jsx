@@ -55,9 +55,6 @@ export default function VideoMeetComponent() {
 
   let [videos, setVideos] = useState([]);
 
-  // =======
-  const [isNewUser, setIsNewUser] = useState(true);
-
   useEffect(() => {
     console.log("HELLO");
     getPermissions();
@@ -511,29 +508,18 @@ export default function VideoMeetComponent() {
   };
 
   const addMessage = (data, sender, socketIdSender) => {
-    setMessages((prevMessages) => {
-      if (isNewUser) {
-        setIsNewUser(false);
-        return [{ sender, data }];
-      }
-      return [...prevMessages, { sender, data }];
-    });
-
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { sender: sender, data: data },
+    ]);
     if (socketIdSender !== socketIdRef.current) {
-      setNewMessages((prev) => prev + 1);
+      setNewMessages((prevNewMessages) => prevNewMessages + 1);
     }
   };
 
   let sendMessage = () => {
-    if (!message.trim()) return;
-
-    if (isNewUser) {
-      setMessages([]);
-    }
-
+    console.log(socketRef.current);
     socketRef.current.emit("chat-message", message, username);
-
-    setIsNewUser(false);
     setMessage("");
   };
 
@@ -565,7 +551,7 @@ export default function VideoMeetComponent() {
             style={{
               display: "flex",
               justifyContent: "center",
-              // flexDirection: "column",
+
               padding: 20,
               gap: 10,
             }}

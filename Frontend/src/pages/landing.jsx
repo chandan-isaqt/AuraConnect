@@ -1,6 +1,16 @@
 import React from "react";
 import "../App.css";
 import { Link, useNavigate } from "react-router-dom";
+const usedNumbers = new Set();
+
+const getUniqueRandomNumber = () => {
+  let num;
+  do {
+    num = Math.floor(Math.random() * 100000) + 1;
+  } while (usedNumbers.has(num));
+  usedNumbers.add(num);
+  return num;
+};
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -14,7 +24,10 @@ export default function LandingPage() {
           <p
             role="button"
             style={{ cursor: "pointer" }}
-            onClick={() => navigate("/guest")}
+            onClick={() => {
+              const randomNumber = getUniqueRandomNumber();
+              navigate(`/${randomNumber}`);
+            }}
           >
             Join as Guest
           </p>
